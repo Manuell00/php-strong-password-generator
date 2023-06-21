@@ -36,39 +36,15 @@ session_start();
     </style>
 </head>
 <body>
-
-    <!-- Imposto le direttive utili del codice php -->
-    <?php
-       // Includo le funzioni
-       include __DIR__. '/partials/function.php';
-
-        // Definisco le variabili di session
-        $_SESSION["password"] = $password;
-
-    ?>
-
-
-    <!-- Definisco il corpo della pagina -->
     <div class="container-fluid">
         <div class="container text-center pt-5 pb-5">
-            <h1>Strong Password Generator</h1>
-            <h2>Genera una password sicura</h2>
-              
-
-            <!-- Inserisco il form -->
-            <form onsubmit="return locate()">
-               <label for="password">Password</label>
-                <input type="text" name="password" id="password">
-                <input type="submit" value="CREATE">
-            </form>
-
-            <?php
-            // Creo la session contenente la funzione richiamata
-            $password = lenFunzione($_GET["password"]);
-            echo $password;
-            ?>
-
-         
+            <h1>La tua password</h1>
+            <h2>
+                <!-- Inserisco la session -->
+                <?php
+                    echo $_SESSION["password"];
+                ?>
+            </h2>
         </div>
     </div>
     
