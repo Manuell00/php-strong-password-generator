@@ -72,16 +72,8 @@ session_start();
         $morecharacter = $_GET["morecharacter"];
         $lesscharacter = $_GET["lesscharacter"];
 
-        // Verifica il valore di $allowRepetition in base all'input radio selezionato
-        if ($morecharacter !== '') {
-            $allowRepetition = true;
-        } elseif ($lesscharacter !== '') {
-            $allowRepetition = false;
-        } else {
-
-        // Valore predefinito nel caso in cui nessun input radio sia selezionato
-        $allowRepetition = false;
-        }
+        // Verifico uguaglianza con il value di allowrepetition
+        $allowRepetition = $_GET["allowrepetition"] === "true";
 
         $password = getRandomLetters($lenpassword, $allowRepetition);
         
@@ -98,29 +90,27 @@ session_start();
             <h1>Strong Password Generator</h1>
             <h2>Genera una password sicura</h2>
               
+        <!-- Inserisco il form -->
+        <form class="mt-5">
+            <div class="riga">
+                <label for="lenpassword">Lunghezza password: </label>
+                <input type="number" name="lenpassword" id="lenpassword" required>
+            </div>
 
-            <!-- Inserisco il form -->
-            <form class="mt-5">
-                <div class="riga">
-                    <label for="lenpassword">Lunghezza password: </label>
-                    <input type="number" name="lenpassword" id="lenpassword">
+            <div class="riga">
+                <div>Consenti la ripetizione di uno o più caratteri:</div>
+                <div>
+                    <!-- Inserisco i required per far si che debbano obbligatoriamente essere selezionati uno dei due campi -->
+                    <input type="radio" id="morecharacter" name="allowrepetition" value="true" required>
+                    <label for="morecharacter">Si</label><br>
+                    <input type="radio" id="lesscharacter" name="allowrepetition" value="false" required>
+                    <label for="lesscharacter">No</label><br>
                 </div>
+            </div>
 
-                <div class="riga">
-                    <div>Consenti la ripetizionedi uno o più caratteri:</div>
-                    <div>
-                        <input type="radio" id="morecharacter" name="morecharacter" value="Si">
-                        <label for="morecharacter">Si</label><br>
-                        <input type="radio" id="lesscharacter" name="lesscharacter" value="No">
-                        <label for="lesscharacter">No</label><br>
-                    </div>
+            <input type="submit" value="Invia">
+        </form>
 
-                    </div>
-          
-
-                <input type="submit" value="Invia">
-
-            </form>
 
             <?php
             // Isset mi restituisce true se la variabile non è nulla
