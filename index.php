@@ -69,33 +69,6 @@ session_start();
             margin-right:10px;
         }
 
-        .container form label {
-            transition: all 0.4s;
-        }
-
-        .container form label:hover {
-            transform: scale(1.1);
-        }
-
-        /* HOVER */
-
-        /* Effetto di hover per la prima riga */
-        .riga:nth-child(1) input:hover {
-            background-color: #f0f0f0;
-            color: #333;
-        }
-
-        /* Effetto di hover per la seconda riga */
-        .riga:nth-child(2) input:hover {
-            border: 2px solid #ffcc00;
-            box-shadow: 0 0 5px #ffcc00;
-        }
-
-        /* Effetto di hover per la terza riga */
-        .riga:nth-child(3) input:hover {
-             transform: scale(1.1);
-        }
-
     </style>
 </head>
 <body>
@@ -138,7 +111,6 @@ session_start();
 
             <!-- Inserisco l'input per la LUNGHEZZA della password -->
                 <div class="riga">
-                     <!-- Inserisco i required per far si che debbano obbligatoriamente essere selezionati uno dei due campi -->
                     <label for="lenpassword">Lunghezza password: </label>
                     <input type="number" name="lenpassword" id="lenpassword" required>
                 </div>
@@ -154,6 +126,7 @@ session_start();
                         <label for="lesscharacter">No</label><br>
 
                         <!-- INSERISCO I CHECK -->
+
                         <!-- Check lettere -->
                         <input type="checkbox" id="letters" name="letters" value="true">
                         <label for="letters">Lettere</label><br>
