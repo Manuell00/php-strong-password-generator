@@ -1,26 +1,37 @@
 <!-- Definisco la lunghezza della password che ho inserito -->
 <?php
     // Definisco una funzione che mi ritorni la lunghezza della password
-    function getRandomLetters($length, $allowRepetition) {
-        $letters = range('a', 'z'); // Genera un array con tutte le lettere minuscole dell'alfabeto
-        $randomLetters = '';
+    function getRandomLetters($length, $allowRepetition, $includeLetters, $includeNumbers, $includeSymbols) {
+        // Inizializzo una stringa vuota per la password generata
+        $password = "";
     
-        for ($i = 0; $i < $length; $i++) {
-            $randomIndex = array_rand($letters); // Seleziona un indice casuale dall'array
-    
-            // Verifica se la ripetizione dei caratteri è consentita
-            if (!$allowRepetition) {
-                // Verifica se il carattere selezionato è già presente nella stringa di lettere casuali
-                while (strpos($randomLetters, $letters[$randomIndex]) !== false) {
-                    $randomIndex = array_rand($letters); // Seleziona un nuovo indice casuale finché non si ottiene un carattere non ripetuto
-                }
-            }
-    
-            $randomLetters .= $letters[$randomIndex]; // Aggiunge la lettera corrispondente all'indice casuale alla stringa di lettere casuali
+        // Definisco i caratteri consentiti in base alle opzioni selezionate
+        $characters = "";
+        if ($includeLetters) {
+            $characters .= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        }
+        if ($includeNumbers) {
+            $characters .= "0123456789";
+        }
+        if ($includeSymbols) {
+            $characters .= "!@#$%^&*()";
         }
     
-        return $randomLetters;
+        // Genero la password selezionando caratteri casuali dalla stringa dei caratteri consentiti
+        for ($i = 0; $i < $length; $i++) {
+            $index = random_int(0, strlen($characters) - 1);
+            $password .= $characters[$index];
+    
+            // Se la ripetizione non è consentita, rimuovi il carattere dalla stringa dei caratteri consentiti
+            if (!$allowRepetition) {
+                $characters = substr_replace($characters, '', $index, 1);
+            }
+        }
+    
+        // Restituisci la password generata
+        return $password;
     }
+    
     
 
     // Definisco una funzione che mi indirizzi ad un altra pagina

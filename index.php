@@ -43,10 +43,9 @@ session_start();
         .container form{
             padding:50px 0;
             font-size:20px;
-            display:flex;
-            align-items:center;
-            flex-direction:column;
+            display:block;
             width : 100%;
+            height:auto;
             border-radius: 20px;
             background-color:whitesmoke;
         }
@@ -72,10 +71,15 @@ session_start();
         $morecharacter = $_GET["morecharacter"];
         $lesscharacter = $_GET["lesscharacter"];
 
+        // Inserisco gli isset perchè essendo una checkbox no sono certo che siano non vuoti e voglio che mi sia resittuito true per la funzione getRandomLetters
+        $includeLetters = isset($_GET["letters"]);
+        $includeNumbers = isset($_GET["numbers"]);
+        $includeSymbols = isset($_GET["symbols"]);
+
         // Verifico uguaglianza con il value di allowrepetition
         $allowRepetition = $_GET["allowrepetition"] === "true";
 
-        $password = getRandomLetters($lenpassword, $allowRepetition);
+        $password = getRandomLetters($lenpassword, $allowRepetition, $includeLetters, $includeNumbers, $includeSymbols);
         
         // Definisco le variabili di session
         $_SESSION['lenpassword'] = $lenpassword;
@@ -92,11 +96,14 @@ session_start();
               
         <!-- Inserisco il form -->
         <form class="mt-5">
+
+        <!-- Inserisco l'input per la LUNGHEZZA della password -->
             <div class="riga">
                 <label for="lenpassword">Lunghezza password: </label>
                 <input type="number" name="lenpassword" id="lenpassword" required>
             </div>
 
+            <!-- Inserisco l'input per CHECKBOX e RADIO -->
             <div class="riga">
                 <div>Consenti la ripetizione di uno o più caratteri:</div>
                 <div>
@@ -105,10 +112,27 @@ session_start();
                     <label for="morecharacter">Si</label><br>
                     <input type="radio" id="lesscharacter" name="allowrepetition" value="false" required>
                     <label for="lesscharacter">No</label><br>
-                </div>
-            </div>
 
-            <input type="submit" value="Invia">
+                    <!-- INSERISCO I CHECK -->
+
+                    <!-- Check lettere -->
+                    <input type="checkbox" id="letters" name="letters" value="true">
+                    <label for="letters">Lettere</label><br>
+
+                    <!-- Check numeri -->
+                    <input type="checkbox" id="numbers" name="numbers" value="true">
+                    <label for="numbers">Numeri</label><br>
+
+                    <!-- Check simboli -->
+                    <input type="checkbox" id="symbols" name="symbols" value="true">
+                    <label for="symbols">Simboli</label><br>
+                </div>
+         </div>
+
+            <!-- Inserisco il SUBMIT -->
+            <div class="riga">
+                <input type="submit" value="Invia">
+            </div>
         </form>
 
 
