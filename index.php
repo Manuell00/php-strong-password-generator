@@ -24,14 +24,39 @@ session_start();
            color : white;
         }
 
+        .container{
+            color:black;
+        }
+
         .container h1{
+            color:white;
             opacity:0.7;
             font-size: 50px;
             margin-bottom:15px
         }
         .container h2{
+            color:white;
             font-size: 35px;
             margin-bottom:15px
+        }
+
+        .container form{
+            padding:50px 0;
+            font-size:20px;
+            display:flex;
+            align-items:center;
+            flex-direction:column;
+            width : 100%;
+            border-radius: 20px;
+            background-color:whitesmoke;
+        }
+
+        .riga{
+            width:100%;
+            display:flex;
+            align-items:center;
+            justify-content: space-around;
+            padding:10px 20px;
         }
     </style>
 </head>
@@ -43,12 +68,12 @@ session_start();
        include __DIR__. '/partials/function.php';
 
         //DEFINISCO LE VARIABILI :
-        $password = $_GET["password"];
-        $lenpassword = lenFunzione($password);
+        $lenpassword = $_GET["lenpassword"];
+        $password = getRandomLetters($lenpassword);
 
         // Definisco le variabili di session
-        $_SESSION['password'] = $password;
         $_SESSION['lenpassword'] = $lenpassword;
+        $_SESSION['password'] = $password;
 
     ?>
 
@@ -61,15 +86,31 @@ session_start();
               
 
             <!-- Inserisco il form -->
-            <form>
-               <label for="password">Password</label>
-                <input type="text" name="password" id="password">
-                <input type="submit" value="CREATE">
+            <form class="mt-5">
+                <div class="riga">
+                    <label for="lenpassword">Lunghezza password: </label>
+                    <input type="number" name="lenpassword" id="lenpassword">
+                </div>
+
+                <div class="riga">
+                    <div>Consenti la ripetizionedi uno o più caratteri:</div>
+                    <div>
+                        <input type="radio" id="morecharacter" name="morecharacter" value="Si">
+                        <label for="morecharacter">Si</label><br>
+                        <input type="radio" id="lesscharacter" name="lesscharacter" value="No">
+                        <label for="lesscharacter">No</label><br>
+                    </div>
+
+                    </div>
+          
+
+                <input type="submit" value="Invia">
+
             </form>
 
             <?php
             // Isset mi restituisce true se la variabile non è nulla
-                if (isset($password)) {
+                if ($lenpassword!=0) {
                     locate();
                 } 
             ?>
