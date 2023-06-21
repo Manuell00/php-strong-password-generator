@@ -57,6 +57,45 @@ session_start();
             justify-content: space-around;
             padding:10px 20px;
         }
+
+        #buttons{
+            width:100%;
+            display:flex;
+            justify-content: flex-start;
+            padding:10px 20px;
+        }
+
+        #buttons input{
+            margin-right:10px;
+        }
+
+        .container form label {
+            transition: all 0.4s;
+        }
+
+        .container form label:hover {
+            transform: scale(1.1);
+        }
+
+        /* HOVER */
+
+        /* Effetto di hover per la prima riga */
+        .riga:nth-child(1) input:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Effetto di hover per la seconda riga */
+        .riga:nth-child(2) input:hover {
+            border: 2px solid #ffcc00;
+            box-shadow: 0 0 5px #ffcc00;
+        }
+
+        /* Effetto di hover per la terza riga */
+        .riga:nth-child(3) input:hover {
+             transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body>
@@ -94,59 +133,69 @@ session_start();
             <h1>Strong Password Generator</h1>
             <h2>Genera una password sicura</h2>
               
-        <!-- Inserisco il form -->
-        <form class="mt-5">
+            <!-- Inserisco il form -->
+            <form class="mt-5">
 
-        <!-- Inserisco l'input per la LUNGHEZZA della password -->
-            <div class="riga">
-                <label for="lenpassword">Lunghezza password: </label>
-                <input type="number" name="lenpassword" id="lenpassword" required>
-            </div>
-
-            <!-- Inserisco l'input per CHECKBOX e RADIO -->
-            <div class="riga">
-                <div>Consenti la ripetizione di uno o più caratteri:</div>
-                <div>
-                    <!-- Inserisco i required per far si che debbano obbligatoriamente essere selezionati uno dei due campi -->
-                    <input type="radio" id="morecharacter" name="allowrepetition" value="true" required>
-                    <label for="morecharacter">Si</label><br>
-                    <input type="radio" id="lesscharacter" name="allowrepetition" value="false" required>
-                    <label for="lesscharacter">No</label><br>
-
-                    <!-- INSERISCO I CHECK -->
-
-                    <!-- Check lettere -->
-                    <input type="checkbox" id="letters" name="letters" value="true">
-                    <label for="letters">Lettere</label><br>
-
-                    <!-- Check numeri -->
-                    <input type="checkbox" id="numbers" name="numbers" value="true">
-                    <label for="numbers">Numeri</label><br>
-
-                    <!-- Check simboli -->
-                    <input type="checkbox" id="symbols" name="symbols" value="true">
-                    <label for="symbols">Simboli</label><br>
+            <!-- Inserisco l'input per la LUNGHEZZA della password -->
+                <div class="riga">
+                     <!-- Inserisco i required per far si che debbano obbligatoriamente essere selezionati uno dei due campi -->
+                    <label for="lenpassword">Lunghezza password: </label>
+                    <input type="number" name="lenpassword" id="lenpassword" required>
                 </div>
-         </div>
 
-            <!-- Inserisco il SUBMIT -->
-            <div class="riga">
-                <input type="submit" value="Invia">
-            </div>
-        </form>
+                <!-- Inserisco l'input per CHECKBOX e RADIO -->
+                <div class="riga">
+                    <label>Consenti la ripetizione di uno o più caratteri:</label>
+                    <div>
+                        <!-- Inserisco i required per far si che debbano obbligatoriamente essere selezionati uno dei due campi -->
+                        <input type="radio" id="morecharacter" name="allowrepetition" value="true" required>
+                        <label for="morecharacter">Si</label><br>
+                        <input type="radio" id="lesscharacter" name="allowrepetition" value="false" required>
+                        <label for="lesscharacter">No</label><br>
+
+                        <!-- INSERISCO I CHECK -->
+                        <!-- Check lettere -->
+                        <input type="checkbox" id="letters" name="letters" value="true">
+                        <label for="letters">Lettere</label><br>
+
+                        <!-- Check numeri -->
+                        <input type="checkbox" id="numbers" name="numbers" value="true">
+                        <label for="numbers">Numeri</label><br>
+
+                        <!-- Check simboli -->
+                        <input type="checkbox" id="symbols" name="symbols" value="true">
+                        <label for="symbols">Simboli</label><br>
+                    </div>
+                </div>
+
+                <!-- Inserisco il SUBMIT -->
+                <div id="buttons">
+                    <input class="btn btn-primary" type="submit" value="Invia">
+                    <input class="btn btn-secondary" type="reset" value="Annulla" onclick="resetForm()">
+                </div>
+            </form>
 
 
-            <?php
-            // Isset mi restituisce true se la variabile non è nulla
-                if ($lenpassword!=0) {
-                    locate();
-                } 
-            ?>
+                <?php
+                // Isset mi restituisce true se la variabile non è nulla
+                    if ($lenpassword!=0) {
+                        locate();
+                    } 
+                ?>
 
-         
         </div>
     </div>
     
+    <!-- Inserisco una funzione javascript per azzerare i valori della form al loro stato originale una volta cliccato il button annulla -->
+    <script>
+    function resetForm() {
+        document.getElementById("lenpassword").value = ""; // Azzeramento dell'input della lunghezza della password
+        document.getElementById("morecharacter").checked = true; // Ripristino del valore predefinito per il radio button
+        document.getElementById("letters").checked = false; // Deselezione dei checkbox
+        document.getElementById("numbers").checked = false;
+        document.getElementById("symbols").checked = false;
+    }
+    </script>
 
  
 </body>

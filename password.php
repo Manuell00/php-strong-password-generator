@@ -37,6 +37,8 @@ session_start();
         .result{
             font-weight:700;
             color:green;
+            word-wrap: break-word; /* Abilita il ritorno a capo automatico */
+            max-width: 100%; /* Limita la larghezza massima al 100% del contenitore */
         }
 
         .container h1{
