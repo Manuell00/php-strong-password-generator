@@ -35,8 +35,29 @@
         <div class="container text-center pt-5 pb-5">
             <h1>Strong Password Generator</h1>
             <h2>Genera una password sicura</h2>
+              
+
+            <!-- Inserisco il form -->
+            <form>
+               <label for="password">Password</label>
+                <input type="text" name="password" id="password">
+                <input type="submit" value="CREATE">
+            </form>
+
+            <!-- Definisco la lunghezza della password che ho inserito -->
+            <?php
+            // Definisco una funzione che mi ritorni la lunghezza della password
+            function lenFunzione($password) {
+                echo strlen($password);
+            }
+
+            // Richiamo la funzione
+            lenFunzione($_GET["password"]);
+            ?>
         </div>
     </div>
     
+
+ 
 </body>
 </html>
