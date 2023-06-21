@@ -69,8 +69,22 @@ session_start();
 
         //DEFINISCO LE VARIABILI :
         $lenpassword = $_GET["lenpassword"];
-        $password = getRandomLetters($lenpassword);
+        $morecharacter = $_GET["morecharacter"];
+        $lesscharacter = $_GET["lesscharacter"];
 
+        // Verifica il valore di $allowRepetition in base all'input radio selezionato
+        if ($morecharacter !== '') {
+            $allowRepetition = true;
+        } elseif ($lesscharacter !== '') {
+            $allowRepetition = false;
+        } else {
+
+        // Valore predefinito nel caso in cui nessun input radio sia selezionato
+        $allowRepetition = false;
+        }
+
+        $password = getRandomLetters($lenpassword, $allowRepetition);
+        
         // Definisco le variabili di session
         $_SESSION['lenpassword'] = $lenpassword;
         $_SESSION['password'] = $password;

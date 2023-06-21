@@ -24,12 +24,19 @@ session_start();
            color : white;
         }
 
-        .container{
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            flex-wrap:wrap;
-            padding:20px;
+        .password-container{
+            font-size:20px;
+            height:auto;
+            width:100%;
+            border-radius:20px;
+            background-color:whitesmoke;
+            color:black;
+            padding:20px 0
+        }
+
+        .result{
+            font-weight:700;
+            color:green;
         }
 
         .container h1{
@@ -47,10 +54,11 @@ session_start();
     <div class="container-fluid">
         <div class="container text-center pt-5 pb-5">
             <h1>La tua password</h1>
-            <div>
+            <div class="password-container mt-5">
                 <!-- Inserisco la session -->
                 <?php
-                    echo $_SESSION['lenpassword']."<br>".$_SESSION['password'];
+                    echo "<div>La lunghezza della password è : "."<span class='result'>".$_SESSION['lenpassword']."</span></div>"."<br>";
+                    echo "<div>La tua password è : "."<span class='result'>".$_SESSION['password']."</span></div>"."<br>"
                 ?>
             </div>
         </div>
