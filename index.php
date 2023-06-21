@@ -42,8 +42,13 @@ session_start();
        // Includo le funzioni
        include __DIR__. '/partials/function.php';
 
+        //DEFINISCO LE VARIABILI :
+        $password = $_GET["password"];
+        $lenpassword = lenFunzione($password);
+
         // Definisco le variabili di session
-        $_SESSION["password"] = $password;
+        $_SESSION['password'] = $password;
+        $_SESSION['lenpassword'] = $lenpassword;
 
     ?>
 
@@ -56,16 +61,17 @@ session_start();
               
 
             <!-- Inserisco il form -->
-            <form onsubmit="return locate()">
+            <form>
                <label for="password">Password</label>
                 <input type="text" name="password" id="password">
                 <input type="submit" value="CREATE">
             </form>
 
             <?php
-            // Creo la session contenente la funzione richiamata
-            $password = lenFunzione($_GET["password"]);
-            echo $password;
+            // Isset mi restituisce true se la variabile non è nulla
+                if (isset($password)) {
+                    locate();
+                } 
             ?>
 
          

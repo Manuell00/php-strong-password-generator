@@ -42,7 +42,7 @@ session_start();
             <h2>
                 <!-- Inserisco la session -->
                 <?php
-                    echo $_SESSION["password"];
+                    echo $_SESSION['lenpassword']."<br>".$_SESSION['password'];
                 ?>
             </h2>
         </div>
