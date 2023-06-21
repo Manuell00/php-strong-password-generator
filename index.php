@@ -44,16 +44,13 @@
                 <input type="submit" value="CREATE">
             </form>
 
-            <!-- Definisco la lunghezza della password che ho inserito -->
             <?php
-            // Definisco una funzione che mi ritorni la lunghezza della password
-            function lenFunzione($password) {
-                echo strlen($password);
-            }
-
+            include __DIR__. '/partials/function.php';
             // Richiamo la funzione
             lenFunzione($_GET["password"]);
             ?>
+
+         
         </div>
     </div>
     
